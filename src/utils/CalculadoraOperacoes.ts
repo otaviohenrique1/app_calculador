@@ -43,11 +43,6 @@ export default class CalculadoraOperacoes {
     return 1 / x;
   }
 
-  static ColocaPontoDecimal(x: string) {
-    let resultado = x.concat(".");
-    return resultado;
-  }
-
   static NumeroPi() {
     return Math.PI;
   }
@@ -56,22 +51,27 @@ export default class CalculadoraOperacoes {
     return Math.log(x);
   }
 
-  static Fatorial(fatorial: number) {
-    let resultado = 0;
-
-    if (fatorial === 0 || fatorial === 1) {
+  static Fatorial(num: number) {
+    if (num === 0 || num === 1) {
       return 1;
+    } else if (!Number.isInteger(num) || num < 0) {
+      return "Erro";
     }
+    for (let i = num - 1; i >= 1; i--) {
+      num *= i;
+    }
+    return num;
+  }
 
-    if (!Number.isInteger(fatorial) || fatorial < 0) {
-      return "Erro"
-    }
-
-    resultado = fatorial;
-    let primeiroMultiplicador = fatorial - 1;
-    for (let index = primeiroMultiplicador; index < 1; index--) {
-      resultado *= index;
-    }
+  static ColocaPontoDecimal(x: string) {
+    let resultado = x.concat(".");
     return resultado;
+  }
+
+  static ColocaNumero(numeroAtual: string, numeroAdicionado: string) {
+    if (numeroAtual === "0") {
+      return numeroAdicionado;
+    }
+    return numeroAtual.concat(numeroAdicionado);
   }
 }

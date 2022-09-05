@@ -5,80 +5,133 @@ import CalculadoraOperacoes from '../utils/CalculadoraOperacoes';
 
 export default function Calculadora() {
   const valorInicialTela = "0";
+  const valorInicialExpressao = "----";
 
   const [valorTela, setValorTela] = useState(valorInicialTela);
   const [valor1, setValor1] = useState(0);
   const [valor2, setValor2] = useState(0);
   const [operador, setOperador] = useState("");
   const [resultado, setResultado] = useState("");
-  const [expressao, setExpressao] = useState({
-    valor1: "", operador: "", valor2: "",
-  });
+  const [expressao, setExpressao] = useState(valorInicialExpressao);
 
   const listaTeclas = [
     { nome: "x**y", cor: "primary", acao: () => { } },
-    { nome: "pi", cor: "primary", acao: () => { } },
-    { nome: "n!", cor: "primary", acao: () => { } },
-    { nome: "log", cor: "primary", acao: () => { } },
+    {
+      nome: "pi", cor: "primary", acao: () => {
+        let resultado = CalculadoraOperacoes.NumeroPi();
+        setExpressao(valorInicialExpressao);
+        setValorTela(resultado.toString());
+      }
+    },
+    {
+      nome: "n!", cor: "primary", acao: () => {
+        let valor = Number(valorTela);
+        let resultado = CalculadoraOperacoes.Fatorial(valor);
+        setExpressao(`${valor}! = `);
+        setValorTela(resultado.toString());
+      }
+    },
+    {
+      nome: "log", cor: "primary", acao: () => {
+        let valor = Number(valorTela);
+        let resultado = CalculadoraOperacoes.Logaritimo(valor);
+        setExpressao(`log(${valor}) = `);
+        setValorTela(resultado.toString());
+      }
+    },
 
-    { nome: "%", cor: "primary", acao: () => { } },
-    { nome: "CE", cor: "primary", acao: () => setValorTela(valorInicialTela) },
-    { nome: "C", cor: "primary", acao: () => setValorTela(valorInicialTela) },
+    {
+      nome: "%", cor: "primary", acao: () => {
+        let valor = Number(valorTela);
+        let resultado = CalculadoraOperacoes.Porcentagem(valor);
+        setExpressao(`${valor}% = `);
+        setValorTela(resultado.toString());
+      }
+    },
+    {
+      nome: "CE", cor: "primary", acao: () => {
+        setValorTela(valorInicialTela);
+        setExpressao(valorInicialExpressao);
+        setOperador("");
+        setResultado("");
+        setValor1(0);
+        setValor2(0);
+      }
+    },
+    {
+      nome: "C", cor: "primary", acao: () => {
+        setValorTela(valorInicialTela);
+        setExpressao(valorInicialExpressao);
+        setOperador("");
+        setResultado("");
+        setValor1(0);
+        setValor2(0);
+      }
+    },
     { nome: "Del", cor: "primary", acao: () => { } },
     { nome: "1/x", cor: "primary", acao: () => { } },
-    { nome: "x**2", cor: "primary", acao: () => { } },
+    {
+      nome: "x**2", cor: "primary", acao: () => {
+        let valor = Number(valorTela);
+        let resultado = CalculadoraOperacoes.PotenciaQuadrado(valor);
+        setExpressao(`${valor}**2 = `);
+        setValorTela(resultado.toString());
+      }
+    },
     {
       nome: "Raiz2", cor: "primary", acao: () => {
-        setValor1(Number(valorTela));
-        setOperador("R2");
+        let valor = Number(valorTela);
+        let resultado = CalculadoraOperacoes.RaizQuadrada(valor);
+        setExpressao(`${valor}R2 = `);
+        setValorTela(resultado.toString());
       }
     },
     { nome: "/", cor: "primary", acao: () => { } },
     {
       nome: "7", cor: "primary", acao: () => {
-        setValorTela("7")
+        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, "7"));
       }
     },
     {
       nome: "8", cor: "primary", acao: () => {
-        setValorTela("8")
+        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, "8"));
       }
     },
     {
       nome: "9", cor: "primary", acao: () => {
-        setValorTela("9")
+        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, "9"));
       }
     },
-    { nome: "x", cor: "primary", acao: () => { } },
+    { nome: "*", cor: "primary", acao: () => { } },
     {
       nome: "4", cor: "primary", acao: () => {
-        setValorTela("4")
+        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, "4"));
       }
     },
     {
       nome: "5", cor: "primary", acao: () => {
-        setValorTela("5")
+        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, "5"));
       }
     },
     {
       nome: "6", cor: "primary", acao: () => {
-        setValorTela("6")
+        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, "6"));
       }
     },
     { nome: "-", cor: "primary", acao: () => { } },
     {
       nome: "1", cor: "primary", acao: () => {
-        setValorTela("1")
+        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, "1"));
       }
     },
     {
       nome: "2", cor: "primary", acao: () => {
-        setValorTela("2")
+        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, "2"));
       }
     },
     {
       nome: "3", cor: "primary", acao: () => {
-        setValorTela("3")
+        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, "3"));
       }
     },
     {
@@ -88,8 +141,19 @@ export default function Calculadora() {
         setOperador("+");
       }
     },
-    { nome: "+/-", cor: "primary", acao: () => { } },
-    { nome: "0", cor: "primary", acao: () => { } },
+    {
+      nome: "+/-", cor: "primary", acao: () => {
+        let valor = Number(valorTela);
+        let resultado = CalculadoraOperacoes.TrocaDeSinal(valor);
+        setExpressao(`+/-${valor} = `);
+        setValorTela(resultado.toString());
+      }
+    },
+    {
+      nome: "0", cor: "primary", acao: () => {
+        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, "0"));
+      }
+    },
     {
       nome: ".", cor: "primary", acao: () => {
         setValorTela(valorTela.concat("."));
@@ -98,9 +162,6 @@ export default function Calculadora() {
     {
       nome: "=", cor: "primary", acao: () => {
         switch (operador) {
-          case "R2":
-            setValorTela(CalculadoraOperacoes.RaizQuadrada(valor1).toString());
-            break;
           case "+":
             setValor2(Number(valorTela));
             setValorTela(CalculadoraOperacoes.Soma(valor1, valor2).toString());
@@ -130,6 +191,7 @@ export default function Calculadora() {
           <h1 className="w-100 text-center">Calculadora</h1>
         </Col>
         <Col xs={12}>
+          <h5 className="w-100 text-end">{expressao}</h5>
           <h2 className="w-100 text-end">{valorTela}</h2>
         </Col>
         {listaTeclas.map((item, index) => {
