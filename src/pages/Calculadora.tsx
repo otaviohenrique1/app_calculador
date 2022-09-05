@@ -101,12 +101,9 @@ export default function Calculadora() {
     },
     {
       nome: DIVISAO, cor: "primary", acao: () => {
-        let valor1 = Number(valorTela);
-        let operador = DIVISAO;
-        let valor2 = Number(valorTela);
-        let resultado = CalculadoraOperacoes.RaizQuadrada(valor1);
-        setExpressao(`R2(${valor1}) = `);
-        setValorTela(resultado.toString());
+        setValor1(Number(valorTela));
+        setOperador(DIVISAO);
+        setValorTela(DIVISAO);
       }
     },
     {
@@ -192,11 +189,11 @@ export default function Calculadora() {
     {
       nome: IGUAL, cor: "primary", acao: () => {
         switch (operador) {
-          case ADICAO:
-            setValor2(Number(valorTela));
-            setValorTela(CalculadoraOperacoes.Soma(valor1, valor2).toString());
-            setValor1(0);
-            setValor2(0);
+          case DIVISAO:
+            let valor2 = Number(valorTela);
+            let resultado = CalculadoraOperacoes.Subtracao(valor1, valor2);
+            setExpressao(`${valor1} ${operador} ${valor2} = `);
+            setValorTela(resultado.toString());
             break;
           default:
             break;
