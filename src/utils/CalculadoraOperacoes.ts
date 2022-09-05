@@ -54,8 +54,12 @@ export default class CalculadoraOperacoes {
   static Fatorial(num: number) {
     if (num === 0 || num === 1) {
       return 1;
-    } else if (!Number.isInteger(num) || num < 0) {
-      return "Erro";
+    } else if (!Number.isInteger(num)) {
+      return "Erro: não aceita numero decimal";
+    } else if (num < 0) {
+      return "Erro: não aceita numero negativo";
+    } else if (isNaN(num)) {
+      return "Erro: não é numero";
     }
     for (let i = num - 1; i >= 1; i--) {
       num *= i;

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button, Col, Row } from 'reactstrap';
 import { Flex } from '../components/Containers/Flex';
 import CalculadoraOperacoes from '../utils/CalculadoraOperacoes';
+import { ADICAO, DELETAR, DIVISAO, FATORIAL, FRACAO, IGUAL, LIMPAR_TELA, LIMPAR_TELA_MEMORIA, LOGARITIMO, MULTIPLICACAO, NUMERO_0, NUMERO_1, NUMERO_2, NUMERO_3, NUMERO_4, NUMERO_5, NUMERO_6, NUMERO_7, NUMERO_8, NUMERO_9, NUMERO_PI, PONTO, PORCENTAGEM, POTENCIA, POTENCIA_QUADRADO, RAIZ_QUADRADA, SUBTRACAO, TROCAR_SINAL } from '../utils/constantes';
 
 export default function Calculadora() {
   const valorInicialTela = "0";
@@ -15,16 +16,20 @@ export default function Calculadora() {
   const [expressao, setExpressao] = useState(valorInicialExpressao);
 
   const listaTeclas = [
-    { nome: "x**y", cor: "primary", acao: () => { } },
     {
-      nome: "pi", cor: "primary", acao: () => {
+      nome: POTENCIA, cor: "primary", acao: () => {
+        // 
+      }
+    },
+    {
+      nome: NUMERO_PI, cor: "primary", acao: () => {
         let resultado = CalculadoraOperacoes.NumeroPi();
         setExpressao(valorInicialExpressao);
         setValorTela(resultado.toString());
       }
     },
     {
-      nome: "n!", cor: "primary", acao: () => {
+      nome: FATORIAL, cor: "primary", acao: () => {
         let valor = Number(valorTela);
         let resultado = CalculadoraOperacoes.Fatorial(valor);
         setExpressao(`${valor}! = `);
@@ -32,7 +37,7 @@ export default function Calculadora() {
       }
     },
     {
-      nome: "log", cor: "primary", acao: () => {
+      nome: LOGARITIMO, cor: "primary", acao: () => {
         let valor = Number(valorTela);
         let resultado = CalculadoraOperacoes.Logaritimo(valor);
         setExpressao(`log(${valor}) = `);
@@ -41,7 +46,7 @@ export default function Calculadora() {
     },
 
     {
-      nome: "%", cor: "primary", acao: () => {
+      nome: PORCENTAGEM, cor: "primary", acao: () => {
         let valor = Number(valorTela);
         let resultado = CalculadoraOperacoes.Porcentagem(valor);
         setExpressao(`${valor}% = `);
@@ -49,7 +54,7 @@ export default function Calculadora() {
       }
     },
     {
-      nome: "CE", cor: "primary", acao: () => {
+      nome: LIMPAR_TELA, cor: "primary", acao: () => {
         setValorTela(valorInicialTela);
         setExpressao(valorInicialExpressao);
         setOperador("");
@@ -59,7 +64,7 @@ export default function Calculadora() {
       }
     },
     {
-      nome: "C", cor: "primary", acao: () => {
+      nome: LIMPAR_TELA_MEMORIA, cor: "primary", acao: () => {
         setValorTela(valorInicialTela);
         setExpressao(valorInicialExpressao);
         setOperador("");
@@ -68,10 +73,18 @@ export default function Calculadora() {
         setValor2(0);
       }
     },
-    { nome: "Del", cor: "primary", acao: () => { } },
-    { nome: "1/x", cor: "primary", acao: () => { } },
     {
-      nome: "x**2", cor: "primary", acao: () => {
+      nome: DELETAR, cor: "primary", acao: () => {
+        // 
+      }
+    },
+    {
+      nome: FRACAO, cor: "primary", acao: () => {
+        // 
+      }
+    },
+    {
+      nome: POTENCIA_QUADRADO, cor: "primary", acao: () => {
         let valor = Number(valorTela);
         let resultado = CalculadoraOperacoes.PotenciaQuadrado(valor);
         setExpressao(`${valor}**2 = `);
@@ -79,90 +92,107 @@ export default function Calculadora() {
       }
     },
     {
-      nome: "Raiz2", cor: "primary", acao: () => {
+      nome: RAIZ_QUADRADA, cor: "primary", acao: () => {
         let valor = Number(valorTela);
         let resultado = CalculadoraOperacoes.RaizQuadrada(valor);
-        setExpressao(`${valor}R2 = `);
+        setExpressao(`R2(${valor}) = `);
         setValorTela(resultado.toString());
       }
     },
-    { nome: "/", cor: "primary", acao: () => { } },
     {
-      nome: "7", cor: "primary", acao: () => {
-        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, "7"));
+      nome: DIVISAO, cor: "primary", acao: () => {
+        let valor1 = Number(valorTela);
+        let operador = DIVISAO;
+        let valor2 = Number(valorTela);
+        let resultado = CalculadoraOperacoes.RaizQuadrada(valor1);
+        setExpressao(`R2(${valor1}) = `);
+        setValorTela(resultado.toString());
       }
     },
     {
-      nome: "8", cor: "primary", acao: () => {
-        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, "8"));
+      nome: NUMERO_7, cor: "primary", acao: () => {
+        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, NUMERO_7));
       }
     },
     {
-      nome: "9", cor: "primary", acao: () => {
-        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, "9"));
-      }
-    },
-    { nome: "*", cor: "primary", acao: () => { } },
-    {
-      nome: "4", cor: "primary", acao: () => {
-        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, "4"));
+      nome: NUMERO_8, cor: "primary", acao: () => {
+        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, NUMERO_8));
       }
     },
     {
-      nome: "5", cor: "primary", acao: () => {
-        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, "5"));
+      nome: NUMERO_9, cor: "primary", acao: () => {
+        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, NUMERO_9));
       }
     },
     {
-      nome: "6", cor: "primary", acao: () => {
-        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, "6"));
-      }
-    },
-    { nome: "-", cor: "primary", acao: () => { } },
-    {
-      nome: "1", cor: "primary", acao: () => {
-        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, "1"));
+      nome: MULTIPLICACAO, cor: "primary", acao: () => {
+        // 
       }
     },
     {
-      nome: "2", cor: "primary", acao: () => {
-        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, "2"));
+      nome: NUMERO_4, cor: "primary", acao: () => {
+        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, NUMERO_4));
       }
     },
     {
-      nome: "3", cor: "primary", acao: () => {
-        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, "3"));
+      nome: NUMERO_5, cor: "primary", acao: () => {
+        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, NUMERO_5));
       }
     },
     {
-      nome: "+", cor: "primary", acao: () => {
+      nome: NUMERO_6, cor: "primary", acao: () => {
+        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, NUMERO_6));
+      }
+    },
+    {
+      nome: SUBTRACAO, cor: "primary", acao: () => {
+        // 
+      }
+    },
+    {
+      nome: NUMERO_1, cor: "primary", acao: () => {
+        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, NUMERO_1));
+      }
+    },
+    {
+      nome: NUMERO_2, cor: "primary", acao: () => {
+        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, NUMERO_2));
+      }
+    },
+    {
+      nome: NUMERO_3, cor: "primary", acao: () => {
+        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, NUMERO_3));
+      }
+    },
+    {
+      nome: ADICAO, cor: "primary", acao: () => {
         setValor1(Number(valorTela));
         setValorTela("0");
-        setOperador("+");
+        setOperador(ADICAO);
       }
     },
     {
-      nome: "+/-", cor: "primary", acao: () => {
+      nome: TROCAR_SINAL, cor: "primary", acao: () => {
         let valor = Number(valorTela);
         let resultado = CalculadoraOperacoes.TrocaDeSinal(valor);
-        setExpressao(`+/-${valor} = `);
+        setExpressao(`${TROCAR_SINAL}${valor} = `);
         setValorTela(resultado.toString());
       }
     },
     {
-      nome: "0", cor: "primary", acao: () => {
-        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, "0"));
+      nome: NUMERO_0, cor: "primary", acao: () => {
+        setValorTela(CalculadoraOperacoes.ColocaNumero(valorTela, NUMERO_0));
       }
     },
     {
-      nome: ".", cor: "primary", acao: () => {
-        setValorTela(valorTela.concat("."));
+      nome: PONTO, cor: "primary", acao: () => {
+        setValorTela(valorTela.concat(PONTO));
       }
     },
     {
-      nome: "=", cor: "primary", acao: () => {
+      nome: IGUAL, cor: "primary", acao: () => {
         switch (operador) {
-          case "+":
+          case ADICAO:
             setValor2(Number(valorTela));
             setValorTela(CalculadoraOperacoes.Soma(valor1, valor2).toString());
             setValor1(0);
@@ -184,7 +214,6 @@ export default function Calculadora() {
       paddingLeft="20px"
       paddingRight="20px"
       maxWidth="500px"
-    // maxHeight="400px"
     >
       <Row>
         <Col xs={12}>
