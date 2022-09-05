@@ -68,8 +68,12 @@ export default class CalculadoraOperacoes {
   }
 
   static ColocaPontoDecimal(x: string) {
-    let resultado = x.concat(".");
-    return resultado;
+    if (x === "0") {
+      return x.concat(".");
+    } else if (x.search(/[.]/g) !== -1) {
+      return;
+    }
+    return x.concat(".");
   }
 
   static ColocaNumero(numeroAtual: string, numeroAdicionado: string) {
