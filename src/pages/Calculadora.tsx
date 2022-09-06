@@ -183,7 +183,7 @@ export default function Calculadora() {
     },
     {
       nome: PONTO, cor: "primary", acao: () => {
-        setValorTela(valorTela.concat(PONTO));
+        setValorTela(CalculadoraOperacoes.ColocaPontoDecimal(valorTela));
       }
     },
     {

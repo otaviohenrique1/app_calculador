@@ -67,11 +67,11 @@ export default class CalculadoraOperacoes {
     return num;
   }
 
-  static ColocaPontoDecimal(x: string) {
+  static ColocaPontoDecimal(x: string): string {
     if (x === "0") {
       return x.concat(".");
     } else if (x.search(/[.]/g) !== -1) {
-      return;
+      return x;
     }
     return x.concat(".");
   }
