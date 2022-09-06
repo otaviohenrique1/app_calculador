@@ -12,7 +12,6 @@ export default function Calculadora() {
   const [valor1, setValor1] = useState(0);
   const [valor2, setValor2] = useState(0);
   const [operador, setOperador] = useState("");
-  const [resultado, setResultado] = useState("");
   const [expressao, setExpressao] = useState(valorInicialExpressao);
 
   const listaTeclas = [
@@ -58,7 +57,6 @@ export default function Calculadora() {
         setValorTela(valorInicialTela);
         setExpressao(valorInicialExpressao);
         setOperador("");
-        setResultado("");
         setValor1(0);
         setValor2(0);
       }
@@ -68,7 +66,6 @@ export default function Calculadora() {
         setValorTela(valorInicialTela);
         setExpressao(valorInicialExpressao);
         setOperador("");
-        setResultado("");
         setValor1(0);
         setValor2(0);
       }
@@ -80,7 +77,10 @@ export default function Calculadora() {
     },
     {
       nome: FRACAO, cor: "primary", acao: () => {
-        // 
+        let valor = Number(valorTela);
+        let resultado = CalculadoraOperacoes.Fracao(valor);
+        setExpressao(`1/${valor} = `);
+        setValorTela(resultado.toString()); 
       }
     },
     {
@@ -190,7 +190,7 @@ export default function Calculadora() {
       nome: IGUAL, cor: "primary", acao: () => {
         switch (operador) {
           case DIVISAO:
-            let valor2 = Number(valorTela);
+            setValor2(Number(valorTela));
             let resultado = CalculadoraOperacoes.Subtracao(valor1, valor2);
             setExpressao(`${valor1} ${operador} ${valor2} = `);
             setValorTela(resultado.toString());

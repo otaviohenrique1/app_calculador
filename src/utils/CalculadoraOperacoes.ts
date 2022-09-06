@@ -1,3 +1,5 @@
+import { NUMERO_0, PONTO } from "./constantes";
+
 export default class CalculadoraOperacoes {
   static Soma(a: number, b: number) {
     return a + b;
@@ -16,6 +18,9 @@ export default class CalculadoraOperacoes {
   }
 
   static RaizQuadrada(x: number) {
+    if (isNaN(x)) {
+      return "Erro: não é numero";
+    }
     return Math.sqrt(x);
   }
 
@@ -24,22 +29,37 @@ export default class CalculadoraOperacoes {
   }
 
   static Potencia(x: number, e: number) {
+    if (isNaN(x)) {
+      return "Erro: não é numero";
+    }
     return Math.pow(x, e);
   }
 
   static PotenciaQuadrado(x: number) {
+    if (isNaN(x)) {
+      return "Erro: não é numero";
+    }
     return Math.pow(x, 2);
   }
 
   static TrocaDeSinal(x: number) {
+    if (isNaN(x)) {
+      return "Erro: não é numero";
+    }
     return x * -1;
   }
 
   static Porcentagem(x: number) {
+    if (isNaN(x)) {
+      return "Erro: não é numero";
+    }
     return x / 100;
   }
 
   static Fracao(x: number) {
+    if (isNaN(x)) {
+      return "Erro: não é numero";
+    }
     return 1 / x;
   }
 
@@ -48,6 +68,9 @@ export default class CalculadoraOperacoes {
   }
 
   static Logaritimo(x: number) {
+    if (isNaN(x)) {
+      return "Erro: não é numero";
+    }
     return Math.log(x);
   }
 
@@ -68,16 +91,24 @@ export default class CalculadoraOperacoes {
   }
 
   static ColocaPontoDecimal(x: string): string {
-    if (x === "0") {
-      return x.concat(".");
-    } else if (x.search(/[.]/g) !== -1) {
+    const regex = /[.]/g;
+    const buscaPonto = x.search(regex);
+    const validaBuscaPonto = buscaPonto !== -1;
+
+    if (isNaN(Number(x))) {
+      return "Erro: não é numero";
+    } else if (x === NUMERO_0) {
+      return x.concat(PONTO);
+    } else if (validaBuscaPonto) {
       return x;
-    }
-    return x.concat(".");
+    } 
+    return x.concat(PONTO);
   }
 
   static ColocaNumero(numeroAtual: string, numeroAdicionado: string) {
-    if (numeroAtual === "0") {
+    if (isNaN(Number(numeroAtual))) {
+      return numeroAdicionado;
+    } else if (numeroAtual === NUMERO_0) {
       return numeroAdicionado;
     }
     return numeroAtual.concat(numeroAdicionado);
